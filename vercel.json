@@ -6,6 +6,13 @@
     {
       "source": "/api/:path*",
       "destination": "https://seu-backend-url.com/api/:path*"
+    },
+    {
+      "source": "{*path}",
+      "has": [
+        { "type": "query", "key": "" }
+      ],
+      "destination": "/index.html"
     }
   ],
   "headers": [

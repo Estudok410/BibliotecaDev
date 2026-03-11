@@ -38,8 +38,9 @@ Sistema de empréstimos de livros em nuvem para a disciplina de Desenvolvimento 
 1. Faça commit de todo o código‑fonte (não inclua `node_modules` ou a pasta `build/`, que já está no `.gitignore`).
 2. Configure a aplicação no Vercel:
    - Defina o **build command** como `cd frontend && npm run build` (já está em `vercel.json`).
-   - Caso o backend seja externo, altere a parte `"destination": "https://seu-backend-url.com/..."` em `vercel.json` para o endereço real.
-   - Se você pretende hospedar a API no mesmo monorepo, considere mover o código para `api/` ou configurar funções serverless; para o momento o rewrite assume backend separado.
+   - Adicione um campo `homepage` em `frontend/package.json` (por exemplo, "/"); isso orienta o CRA a gerar URLs relativas adequadas e evita avisos durante o build.
+   - No `vercel.json` já há uma regra de proxy para `/api/*` e uma regra de fallback que envia todas as outras rotas para `index.html`. Se o backend estiver em outro domínio, ajuste a URL do proxy; mantenha a regra de SPA para que o roteamento do React Router funcione corretamente.
+   - Caso planeje hospedar a API no mesmo monorepo, considere mover o código para uma pasta `api/` ou configurar funções serverless. Por enquanto o rewrite assume que a API está em um domínio separado.
 3. Configure as variáveis de ambiente no dashboard do Vercel: `DATABASE_URL`, `JWT_KEY`, etc.
 4. Após push para o branch `main`, o Vercel irá construir automaticamente o frontend usando as dependências instaladas.
 
